@@ -2,6 +2,12 @@
 
 Neovim plugin for quick visual hints of relative distances from your cursor
 
+[relative_rainbow_example](https://github.com/user-attachments/assets/0c76f5e1-6242-4a7b-86c7-de4d06abd447)
+
+## Motivation
+- Visual hints require less cognitive bandwidth to parse when compared to a long list of numbers
+- ooo pretty colors
+
 ---
 
 ## Installation
@@ -40,7 +46,6 @@ require("relative-rainbow").setup()
 {
   'fluxdiv/relative-rainbow.nvim',
   config = function()
-    -- `/
     local grayscale_templates = require("relative-rainbow.config.templates.grayscale")
     require("relative-rainbow").setup(grayscale_templates.grayscale_tint_line)
 

@@ -13,7 +13,7 @@ M.grayscale_line = {
 M.grayscale_tint = {
   { distance_from_cursor = 5, bg_tint = "#000000", tint_multiplier = 0.25, fill_mode = true },
   { distance_from_cursor = 11, bg_tint = "#2E2E2E", tint_multiplier = 0.25, fill_mode = true },
-  { distance_from_cursor = 22, bg_tint = "#5A5A5A", tint_multiplier = 0.25, fill_mode = true },
+  { distance_from_cursor = 22, bg_tint = "#505050", tint_multiplier = 0.25, fill_mode = true },
 }
 M.grayscale_tint_line = {
   { distance_from_cursor = 5, bg_tint = "#000000", tint_multiplier = 0.25, fill_mode = false },

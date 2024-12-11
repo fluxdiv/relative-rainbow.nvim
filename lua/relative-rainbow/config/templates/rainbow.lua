@@ -1,5 +1,13 @@
 local M = {}
 
+-- Rainbow line dark
+M.rainbow_line_dark = {
+  { distance_from_cursor = 5, bg_tint = "#3D0300", tint_multiplier = 0.1, fill_mode = false }, -- Dark red
+  { distance_from_cursor = 11, bg_tint = "#3a3d00", tint_multiplier = 0.1, fill_mode = false }, -- Dark yellow
+  { distance_from_cursor = 17, bg_tint = "#003d0b", tint_multiplier = 0.1, fill_mode = false }, -- Dark green
+  { distance_from_cursor = 22, bg_tint = "#00313d", tint_multiplier = 0.1, fill_mode = false }, -- Dark blue
+}
+
 -- Inner red, outer blue
 M.rainbow_red_solid = {
   { distance_from_cursor = 3, bg = "#FF0000", fill_mode = true }, -- Red
