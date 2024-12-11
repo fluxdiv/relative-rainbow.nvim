@@ -20,11 +20,15 @@ local opts = {}
 local apply_highlights = function()
 
   local buffer = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_clear_namespace(buffer, ns_id, 0, -1)
+
+  -- disable within terminal buffers
+  if vim.bo[buffer].buftype == "terminal" then
+    return
+  end
+
   local current_line = vim.api.nvim_win_get_cursor(0)[1]
   local total_lines = vim.api.nvim_buf_line_count(buffer)
-
-  -- vim.api.nvim_buf_clear_namespace(buffer, -1, 0, -1)
-  vim.api.nvim_buf_clear_namespace(buffer, ns_id, 0, -1)
 
   -- For each range in opts, apply highlights
   for index, rainbow_step in ipairs(opts) do
