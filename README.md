@@ -5,8 +5,8 @@ Neovim plugin for quick visual hints of relative distances from your cursor
 [relative_rainbow_example](https://github.com/user-attachments/assets/0c76f5e1-6242-4a7b-86c7-de4d06abd447)
 
 ## Motivation
-- Visual hints require less cognitive bandwidth to parse when compared to a long list of numbers
-- ooo pretty colors
+- Colors require less mental bandwidth to parse than a long list of numbers
+- Zip around files quickly, just like a rainbow does.
 
 ---
 
@@ -58,10 +58,14 @@ require("relative-rainbow").setup()
 ### Custom config
 You can customize your config by passing a table of config options to `.setup()`. Each entry represents a "step" and supports the following fields:
 - `distance_from_cursor` (number): Distance from cursor to apply highlight
-- `bg` (string|nil): Solid background color in hex (ex "#FF0000")
-- `bg_tint` (string|nil): Apply a tint color to current theme's bg (instead of a solid color)
-- `tint_multiplier` (number|nil): Strength of tint (between 0 and 1). Larger = stronger tint
+- `hl_target` ("number_column"|"editor"|"both"|nil): Where to apply highlight. Defaults to `"both"`. See example images for more details
 - `fill` (boolean): If `true`, highlights the entire range. If `false` only highlights the 2 individual lines @ `distance_from_cursor`. Defaults to `true`
+- `bg` (string|nil): Solid background color in hex (ex "#FF0000") Overrides `bg_tint` if provided
+- `bg_tint` (string|nil): Apply a tint color to current theme's bg (instead of a solid color)
+- `bg_tint_multiplier` (number|nil): Strength of bg tint (between 0 and 1). Larger = stronger tint
+- `fg` (string|nil): Solid fg color in hex. Overrides `fg_tint` if provided
+- `fg_tint` (string|nil): Apply a tint color to current theme's fg
+- `fg_tint_multiplier` (number|nil): Strength of fg tint (between 0 and 1). Larger = stronger tint
 
 ### Example custom config
 ```lua
@@ -69,36 +73,33 @@ You can customize your config by passing a table of config options to `.setup()`
   'fluxdiv/relative-rainbow.nvim',
   config = function()
     require("relative-rainbow").setup({
-      { distance_from_cursor = 5, bg = "#123456", fill = true },
-      { distance_from_cursor = 10, bg_tint = "#654321", tint_multiplier = 0.5, fill = false },
-      { distance_from_cursor = 15, bg_tint = "#FF0000", tint_multiplier = 0.75, fill = true },
+      -- Entry with all fields provided
+      {
+        distance_from_cursor = 5,
+        hl_target = "both",
+        fill = false,
+        -- "bg" overrides "bg_tint" and "bg_tint_multiplier"
+        bg = "#FF0000",
+        bg_tint = "#000000",
+        bg_tint_multiplier = 0.1,
+        -- "fg" overrides "fg_tint" and "fg_tint_multiplier"
+        fg = "#FF0000",
+        fg_tint = "#000000",
+        fg_tint_multiplier = 0.99,
+      },
+      -- Individual highlights for editor & number_column at same distance (same lines)
+      {
+        distance_from_cursor = 11,
+        hl_target = "editor",
+        bg_tint = "#000000",
+      },
+      {
+        distance_from_cursor = 11,
+        hl_target = "number_column",
+        fg = "#00FFD0",
+        fill = false,
+      },
     })
-  end
-}
-```
-
-### Create your own templates
-You can also define your own templates and store them in your config for reuse:
-```lua
--- ~/.config/nvim/lua/my_templates.lua
-local M = {}
-
-M.my_custom_template = {
-  { distance_from_cursor = 3, bg = "#FF0000", fill = true }, -- Red
-  { distance_from_cursor = 6, bg = "#00FF00", fill = true }, -- Green
-  { distance_from_cursor = 9, bg = "#0000FF", fill = true }, -- Blue
-}
-
-return M
-```
-
-```lua
--- ~/.config/nvim/lua/init.lua
-{
-  'fluxdiv/relative-rainbow.nvim',
-  config = function()
-    local my_templates = require("my_templates")
-    requre("relative-rainbow").setup(my_templates.my_custom_template)
   end
 }
 ```
