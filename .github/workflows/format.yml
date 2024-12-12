@@ -1,0 +1,34 @@
+# name: format
+#
+# on:
+#   workflow_dispatch:
+#
+# jobs:
+#   format:
+#     name: Format with stylua
+#     runs-on: ubuntu-latest
+#
+#     permissions:
+#       contents: write
+#
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#
+#       - name: Install stylua
+#         run: |
+#           cargo install stylua
+#
+#       - name: Run stylua format
+#         run: |
+#           stylua .
+#
+#       - name: Commit and Push after formatting
+#         uses: stefanzweifel/git-auto-commit-action@v4
+#         with:
+#           commit_message: "chore: auto-format via stylua"
+#           commit_user_name: "github-actions[bot]"
+#           commit_user_email: "github-actions[bot]@users.noreply.github.com"
+#           commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+#           branch: ${{ github.ref_name }}
+#

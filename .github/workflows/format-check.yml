@@ -1,0 +1,23 @@
+# name: format-check
+#
+# on:
+#   pull_request:
+#     paths:
+#       - '**.lua'
+#
+# jobs:
+#   check-stylua:
+#     name: Check stylua formatting
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#
+#       - name: Install stylua
+#         run: |
+#           cargo install stylua
+#
+#       - name: Run stylua check
+#         run: |
+#           stylua --check .

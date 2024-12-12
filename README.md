@@ -61,7 +61,7 @@ You can customize your config by passing a table of config options to `.setup()`
 - `bg` (string|nil): Solid background color in hex (ex "#FF0000")
 - `bg_tint` (string|nil): Apply a tint color to current theme's bg (instead of a solid color)
 - `tint_multiplier` (number|nil): Strength of tint (between 0 and 1). Larger = stronger tint
-- `fill_mode` (boolean): If `true`, highlights the entire range. If `false` only highlights the 2 individual lines @ `distance_from_cursor`. Defaults to `true`
+- `fill` (boolean): If `true`, highlights the entire range. If `false` only highlights the 2 individual lines @ `distance_from_cursor`. Defaults to `true`
 
 ### Example custom config
 ```lua
@@ -69,9 +69,9 @@ You can customize your config by passing a table of config options to `.setup()`
   'fluxdiv/relative-rainbow.nvim',
   config = function()
     require("relative-rainbow").setup({
-      { distance_from_cursor = 5, bg = "#123456", fill_mode = true },
-      { distance_from_cursor = 10, bg_tint = "#654321", tint_multiplier = 0.5, fill_mode = false },
-      { distance_from_cursor = 15, bg_tint = "#FF0000", tint_multiplier = 0.75, fill_mode = true },
+      { distance_from_cursor = 5, bg = "#123456", fill = true },
+      { distance_from_cursor = 10, bg_tint = "#654321", tint_multiplier = 0.5, fill = false },
+      { distance_from_cursor = 15, bg_tint = "#FF0000", tint_multiplier = 0.75, fill = true },
     })
   end
 }
@@ -84,9 +84,9 @@ You can also define your own templates and store them in your config for reuse:
 local M = {}
 
 M.my_custom_template = {
-  { distance_from_cursor = 3, bg = "#FF0000", fill_mode = true }, -- Red
-  { distance_from_cursor = 6, bg = "#00FF00", fill_mode = true }, -- Green
-  { distance_from_cursor = 9, bg = "#0000FF", fill_mode = true }, -- Blue
+  { distance_from_cursor = 3, bg = "#FF0000", fill = true }, -- Red
+  { distance_from_cursor = 6, bg = "#00FF00", fill = true }, -- Green
+  { distance_from_cursor = 9, bg = "#0000FF", fill = true }, -- Blue
 }
 
 return M
