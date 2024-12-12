@@ -1,7 +1,7 @@
 local M = {}
 
 function math.round(num)
-  return num + (2^52 + 2^51) - (2^52 + 2^51)
+  return num + (2 ^ 52 + 2 ^ 51) - (2 ^ 52 + 2 ^ 51)
 end
 
 function math.clamp(num, min, max)
@@ -66,7 +66,7 @@ end
 ---@type TargetTable
 local TARGET = {
   editor = "Normal",
-  number_column = "LineNr"
+  number_column = "LineNr",
 }
 
 ---@param target_group TargetGroup #
@@ -76,10 +76,14 @@ local function get_hl_group(target_group)
     bg_hl = nil,
     fg_hl = nil,
   }
-  if target_group == nil then return r end
+  if target_group == nil then
+    return r
+  end
 
   local curr_hl = vim.api.nvim_get_hl(0, { name = target_group.target })
-  if curr_hl == nil then return r end
+  if curr_hl == nil then
+    return r
+  end
 
   -- bg hl color
   if target_group.bg ~= nil then
@@ -104,7 +108,6 @@ local function get_hl_group(target_group)
   end
 
   return r
-
 end
 
 ---@return { editor_hls: { bg_hl: string|nil, fg_hl: string|nil }, numcol_hls: { bg_hl: string|nil, fg_hl: string|nil }}
@@ -113,7 +116,9 @@ M.get_hl_colors = function(rainbow_step)
     editor_hls = { bg_hl = nil, fg_hl = nil },
     numcol_hls = { bg_hl = nil, fg_hil = nil },
   }
-  if rainbow_step == nil then return r end
+  if rainbow_step == nil then
+    return r
+  end
 
   if rainbow_step.hl_target == "both" or rainbow_step.hl_target == nil then
     local nc = vim.tbl_extend("force", rainbow_step, { target = TARGET.number_column })
@@ -129,7 +134,6 @@ M.get_hl_colors = function(rainbow_step)
   end
 
   return r
-
 end
 
 return M
