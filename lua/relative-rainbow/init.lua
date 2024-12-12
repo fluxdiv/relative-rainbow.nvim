@@ -1,6 +1,6 @@
 local M = {}
 
-local colors = require('relative-rainbow.colors')
+local colors = require("relative-rainbow.colors")
 local defaults = require("relative-rainbow.config.defaults")
 
 --- List of configuration steps
@@ -14,7 +14,6 @@ local opts = {}
 --
 
 local apply_highlights = function()
-
   local buffer = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_clear_namespace(buffer, ns_id, 0, -1)
 
@@ -31,7 +30,6 @@ local apply_highlights = function()
 
   -- For each range in opts, apply highlights
   for index, rainbow_step in ipairs(opts) do
-
     local hl_editor_name = string.format("RelativeRainbow%deditor", index)
     local hl_numcol_name = string.format("RelativeRainbow%dnumcol", index)
 
@@ -55,7 +53,7 @@ local apply_highlights = function()
     local extmark_opts = {
       -- hl_group doesn't matter
       -- hl_group = hl_bg_name,
-      hl_eol = true
+      hl_eol = true,
     }
 
     if rainbow_step.hl_target == nil or rainbow_step.hl_target == "both" then
@@ -84,7 +82,7 @@ local apply_highlights = function()
         table.insert(nofill_lines, start_line)
         table.insert(nofill_lines, end_line)
       else
-        table.insert(fill_ranges, {start_line, end_line})
+        table.insert(fill_ranges, { start_line, end_line })
       end
     else
       -- Not first rainbow step, need 2 line ranges
@@ -104,11 +102,10 @@ local apply_highlights = function()
         table.insert(nofill_lines, B_end_line)
       else
         fill_ranges = {}
-        table.insert(fill_ranges, {A_start_line, A_end_line})
-        table.insert(fill_ranges, {B_start_line, B_end_line})
+        table.insert(fill_ranges, { A_start_line, A_end_line })
+        table.insert(fill_ranges, { B_start_line, B_end_line })
       end
     end
-
 
     if rainbow_step.fill == false then
       for _, line in ipairs(nofill_lines) do
@@ -121,10 +118,8 @@ local apply_highlights = function()
         end
       end
     end
-
   end
 end
-
 
 --- Schema for a single configuration step in `relative-rainbow.nvim`.
 --- @class RelativeRainbowStep
@@ -177,13 +172,14 @@ function M.setup(user_opts)
   opts = user_opts or default_opts
 
   -- sort ascending
-  table.sort(opts, function(a, b) return a.distance_from_cursor < b.distance_from_cursor end)
+  table.sort(opts, function(a, b)
+    return a.distance_from_cursor < b.distance_from_cursor
+  end)
 
-  vim.api.nvim_create_autocmd({ 'CursorMoved', 'WinEnter', 'BufEnter', 'BufWinEnter' }, {
+  vim.api.nvim_create_autocmd({ "CursorMoved", "WinEnter", "BufEnter", "BufWinEnter" }, {
     callback = apply_highlights,
-    pattern = '*'
+    pattern = "*",
   })
-
 end
 
 return M
