@@ -1,2 +1,2 @@
-assets/* export-ignore
+assets/** export-ignore
 .github/** export-ignore

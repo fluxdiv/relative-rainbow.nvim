@@ -14,7 +14,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install stylua
+      - name: Cache
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo
+          key: ${{ runner.os }}-cargo-stylua-cache
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Install stylua
         run: |
           cargo install stylua
 

@@ -1,15 +1,15 @@
-name: format
+name: populate_or_update_cache
 
+# Cached on main, should be available on every branch derived from main
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - "main"
 
 jobs:
-  format:
-    name: Format with stylua manual dispatch
+  build-cache:
+    name: Build cache
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout
@@ -22,28 +22,14 @@ jobs:
       # Since the hash is not needed, as Cargo.lock will be updated rarely & manually
       # anyway, a simpler key works and can prevent potential bad things
       - name: Cache
-        id: cache
         uses: actions/cache@v4
+        id: cache
         with:
           path: |
             ~/.cargo
-          key: ${{ runner.os }}-cargo-stylua-cache
+        key: ${{ runner.os }}-cargo-stylua-cache
 
       - if: steps.cache.outputs.cache-hit != 'true'
         name: Install stylua
         run: |
           cargo install stylua
-
-      - name: Run stylua format
-        run: |
-          stylua .
-
-      - name: Commit and Push after formatting
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "chore: auto-format via stylua"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
-          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-          branch: ${{ github.ref_name }}
-
