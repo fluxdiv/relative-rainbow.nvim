@@ -76,14 +76,10 @@ local function get_hl_group(target_group)
     bg_hl = nil,
     fg_hl = nil,
   }
-  if target_group == nil then
-    return r
-  end
+  if target_group == nil then return r end
 
   local curr_hl = vim.api.nvim_get_hl(0, { name = target_group.target })
-  if curr_hl == nil then
-    return r
-  end
+  if curr_hl == nil then return r end
 
   -- bg hl color
   if target_group.bg ~= nil then
