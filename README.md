@@ -2,7 +2,8 @@
 
 Neovim plugin for quick visual hints of relative distances from your cursor
 
-[relative_rainbow_example](https://github.com/user-attachments/assets/0c76f5e1-6242-4a7b-86c7-de4d06abd447)
+![example_screenshot_1](assets/default_and_rblinedrk.png)
+![example_screenshot_2](assets/gs_tint_line_and_cyberpunk.png)
 
 ## Motivation
 - Colors require less mental bandwidth to parse than a long list of numbers
