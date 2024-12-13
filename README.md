@@ -48,10 +48,13 @@ require("relative-rainbow").setup()
   'fluxdiv/relative-rainbow.nvim',
   config = function()
     local grayscale_templates = require("relative-rainbow.config.templates.grayscale")
-    require("relative-rainbow").setup(grayscale_templates.grayscale_tint_line)
+    -- require("relative-rainbow").setup(grayscale_templates.grayscale_tint_line)
 
     local rainbow_templates = require("relative-rainbow.config.templates.rainbow")
-    require("relative-rainbow").setup(rainbow_templates.rainbow_blue_tint)
+    -- require("relative-rainbow").setup(rainbow_templates.rainbow_line_dark)
+
+    local misc_templates = require("relative-rainbow.config.templates.misc")
+    require("relative-rainbow").setup(misc_templates.cyberpunk)
   end
 }
 ```
