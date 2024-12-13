@@ -27,7 +27,7 @@ jobs:
         with:
           path: |
             ~/.cargo
-        key: ${{ runner.os }}-cargo-stylua-cache
+          key: ${{ runner.os }}-cargo-stylua-cache
 
       - if: steps.cache.outputs.cache-hit != 'true'
         name: Install stylua
